@@ -138,6 +138,7 @@ class MainTest {
     }
 
 
+
     /*-------------------DeveloperControllerTest-------------------*/
 
 
@@ -147,7 +148,7 @@ class MainTest {
         // Simulate @PostConstruct call if necessary. In reality, this is managed by Spring.
         controller.init();
         Developer developer = new Developer(1, "Initial Developer", 5000.0, Experience.JUNIOR);
-        mockMvc.perform(post("/developers")
+        mockMvc.perform(post("/workintech/developers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(developer)))
                 .andExpect(status().isCreated());
@@ -200,7 +201,7 @@ class MainTest {
     @Order(2)
     void testAddDeveloper() throws Exception {
         Developer newDeveloper = new Developer(2, "New Developer", 6000.0, Experience.MID);
-        mockMvc.perform(post("/developers")
+        mockMvc.perform(post("/workintech/developers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newDeveloper)))
                 .andExpect(status().isCreated());
@@ -210,7 +211,7 @@ class MainTest {
     @DisplayName("DeveloperController:GetAllDevelopers")
     @Order(3)
     void testGetAllDevelopers() throws Exception {
-        mockMvc.perform(get("/developers"))
+        mockMvc.perform(get("/workintech/developers"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").exists());
@@ -220,7 +221,7 @@ class MainTest {
     @DisplayName("DeveloperController:GetDeveloperById")
     @Order(4)
     void testGetDeveloperById() throws Exception {
-        mockMvc.perform(get("/developers/{id}", 1))
+        mockMvc.perform(get("/workintech/developers/{id}", 1))
                 .andExpect(status().isOk());
     }
 
@@ -229,7 +230,7 @@ class MainTest {
     @Order(5)
     void testUpdateDeveloper() throws Exception {
         Developer updatedDeveloper = new Developer(1, "Updated Developer", 7000.0, Experience.SENIOR);
-        mockMvc.perform(put("/developers/{id}", 1)
+        mockMvc.perform(put("/workintech/developers/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedDeveloper)))
                 .andExpect(status().isOk());
@@ -239,7 +240,7 @@ class MainTest {
     @DisplayName("DeveloperController:DeleteDeveloper")
     @Order(6)
     void testDeleteDeveloper() throws Exception {
-        mockMvc.perform(delete("/developers/{id}", 1))
+        mockMvc.perform(delete("/workintech/developers/{id}", 1))
                 .andExpect(status().isOk());
     }
 }
